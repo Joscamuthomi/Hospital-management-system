@@ -1,0 +1,108 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <style>
+     body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-top: 10px;
+        }
+        input, select {
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        h2, h3 {
+            margin-top: 20px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .medication-group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 15px;
+        }
+ </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prescription Form</title>
+</head>
+<body>
+    <div class="container">
+        <form id="form" action="presription_handler.php" method="POST">
+            <h2>Prescription Form</h2>
+
+            <label for="username">Name:</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="idNumber">ID Number:</label>
+            <input type="text" id="idNumber" name="idNumber" required>
+
+            <input type="hidden" id="drName" name="drName" value="<?php echo $drName; ?>">
+
+            <div id="medicationList">
+                <div class="medication-group">
+                    <label for="medication">Medication:</label>
+                    <input type="text" name="medication[]" required>
+
+                    <label for="prescription">Prescription:</label>
+                    <input type="text" name="prescription[]" required>
+
+                    <label for="days">Number of Days:</label>
+                    <input type="number" name="days[]" required>
+                </div>
+            </div>
+
+            <button type="button" onclick="addMedication()">Add Another Medication</button>
+            <br>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        function addMedication() {
+            const medicationGroup = document.createElement('div');
+            medicationGroup.className = 'medication-group';
+
+            medicationGroup.innerHTML = `
+                <label for="medication">Medication:</label>
+                <input type="text" name="medication[]" required>
+
+                <label for="prescription">Prescription:</label>
+                <input type="text" name="prescription[]" required>
+
+                <label for="days">Number of Days:</label>
+                <input type="number" name="days[]" required>
+            `;
+            
+            document.getElementById('medicationList').appendChild(medicationGroup);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LIVECARE HOSPITAL</title>
+    <script src="lifecare.js"></script>
+    <link rel="stylesheet" href="lifecare.css">
+   
+</head>
+<body>
+    <div class="top-bar">
+        <div class="contact-info">
+            <span>Contact Us: <span style="color: brown;">+2546767353</span></span>
+        </div>
+        <div class="visit-info">
+            <span>Visit Us:  <span style="color: rgb(23, 0, 128);">We're open 24/7</span></span>
+        </div>
+        <div class="social-media">
+            <a href="https://www.youtube.com" target="_blank">YouTube</a>
+            <a href="https://twitter.com" target="_blank">Twitter</a>
+            <a href="https://www.facebook.com" target="_blank">Facebook</a>
+            <a href="https://www.instagram.com" target="_blank">Instagram</a>
+        </div>
+    </div>
+
+    <div class="nav-container">
+        <div class="logo">
+            <img src="images/th.jpeg" alt="Hospital Logo">
+        </div>
+       
+        <a href="javascript:void(0);" class="icon" onclick="toggleNav()">
+            ☰ 
+        </a>
+        <nav class="navbar" id="navbar">
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#About">About Us</a></li>
+                <li>
+                    <a href="#services">Services</a>
+                </li>
+                <li>
+                    <a href="#resources">Patients resources</a>
+                    <ul class="submenu">
+                        <li><a href="#portal">Patient Portal</a></li>
+                        <li><a href="appointment booking.html">Appointment Booking</a></li> 
+                        <li><a href="#customer care contact">patients support line</a></li>
+                    </ul>
+                </li>
+                <li>
+                  <a href="#resources">CarePoint</a>
+                  <ul class="submenu">
+                      <li><a href="admin_login.html">Admin</a></li>
+                      <li><a href="user login.html">staff Portal</a></li> 
+                      <li><a href="patient_login.php">patient_portal</a></li> 
+                      
+                  </ul>
+              </li>
+              <li>
+                <a href="#news">news&Events</a>
+            </li>
+           
+             
+               
+            </ul>
+        </nav>
+    </div>
+
+    <div class="slider">
+      <div class="slide active">
+          <img src="images/Okayama_Red_Cross_Hospital.jpg" alt="Hospital Photo 1">
+          <div class="message">Welcome to LiveCare Hospital!. <br>Your Health is our priority</div>
+      </div>
+      <div class="slide">
+          <img src="images/13483_00_N100_highreslrg-2_5ae402c9837860cd6e4f65e304b3a5fa.jpg" alt="Hospital Photo 2">
+          <div class="message">Providing Quality Care, Every Day.</div>
+      </div>
+      <div class="slide">
+          <img src="images/photos-doctors-in-surgery.jpg" alt="Hospital Photo 3">
+          <div class="message">Your Health, Our Priority.</div>
+      </div>
+      <div class="slide">
+        <img src="images/clinical mang2.jpg" alt="Hospital Photo 4">
+        <div class="message">Your Health, Our Priority.</div>
+    </div>
+  
+    
+      <div class="helpdesk-popup">
+          <a href="https://wa.me/1234567890" target="_blank">
+              <img src="images/whatsup icon.jpeg" alt="WhatsApp Helpdesk">
+          </a>
+      </div>
+  
+      <div class="search-popup">
+          <input type="text" placeholder="Search...">
+          <button><i class="fa fa-search"></i></button>
+      </div>
+  
+     
+      <div class="appointment-popup">
+        <a href="appointment_booking.php"><button>Book an Appointment</button></a>
+      </div>
+  </div>
+  
+    <script>
+        
+        function toggleNav() {
+            var x = document.getElementById("navbar").getElementsByTagName("ul")[0];
+            if (x.className === "") {
+                x.className = "show";
+            } else {
+                x.className = "";
+            }
+        }
+
+        
+        document.querySelectorAll('.navbar ul li a').forEach(link => {
+            link.addEventListener('click', function(event) {
+                var submenu = this.nextElementSibling;
+                if (submenu && submenu.classList.contains('submenu')) {
+                    event.preventDefault(); 
+                    submenu.classList.toggle('show'); 
+
+                    document.querySelectorAll('.navbar ul li ul.submenu').forEach(otherSubmenu => {
+                        if (otherSubmenu !== submenu) {
+                            otherSubmenu.classList.remove('show');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+    <script src="lifecare.js"></script>
+    <h1 id="About" style="color: blue; font-family: Georgia, 'Times New Roman', Times, serif; font-weight: bold; font-size: 2em; text-align: center;">
+        <u>About us</u>
+      </h1>
+    <section class="about-us" >
+        <div class="image-div">
+            <img src="images/Okayama_Red_Cross_Hospital.jpg" alt="LifeCare Hospital" class="hospital-image">
+            <div class="vision-mission-overlay">
+                <h2>Our Vision</h2>
+                <p>To be the leading healthcare provider committed to delivering exceptional care with compassion and excellence.</p>
+                <h2>Our Mission</h2>
+                <p>To improve the health and well-being of our community through innovative and patient-centered care, driven by our commitment to quality and integrity.</p>
+            </div>
+        </div>
+        <div class="message-div">
+            <div class="message-container">
+                <h1>Welcome to LifeCare Hospital</h1>
+                <p>At LifeCare Hospital, we are dedicated to providing top-notch healthcare services in a compassionate and supportive environment. Our team of skilled professionals is committed to delivering personalized care to meet the unique needs of each patient.</p>
+                <p>We strive to foster a culture of excellence, innovation, and respect in everything we do. Thank you for choosing us as your healthcare partner, and we look forward to serving you and your family with the highest standards of care.</p>
+            </div>
+        </div>
+    </section>
+    <section id="services" class="services-section">
+        <h1 style="color: blue; font-family: Georgia, 'Times New Roman', Times, serif; font-weight: bold; font-size: 2em; text-align: center;">
+          <u>Our Services</u>
+        </h1>
+        <div class="carousel-container">
+          <button class="carousel-button prev-button">Previous</button>
+          <div class="carousel-wrapper">
+            <div class="services-container">
+              <!-- Service 1 -->
+              <div class="service-item">
+                <img src="images/medical imaging.jpg" alt="Medical Imaging">
+                <a href="more-services-page1.html" class="service-link">
+                  <span class="service-text">Medical Imaging</span>
+                </a>
+              </div>
+      
+              <!-- Service 2 -->
+              <div class="service-item">
+                <img src="images/emergency clinic.jpg" alt="Emergency Care">
+                <a href="more-services-page2.html" class="service-link">
+                  <span class="service-text">Emergency Care</span>
+                </a>
+              </div>
+      
+              <!-- Service 3 -->
+              <div class="service-item">
+                <img src="images/lab services.jpeg" alt="Lab Services">
+                <a href="more-services-page3.html" class="service-link">
+                  <span class="service-text">Lab Services</span>
+                </a>
+              </div>
+      
+              <!-- Service 4 -->
+              <div class="service-item">
+                <img src="images/maternity.jpg" alt="Maternity">
+                <a href="more-services-page4.html" class="service-link">
+                  <span class="service-text">Maternity</span>
+                </a>
+              </div>
+             
+      
+              <!-- Service 5 -->
+              <div class="service-item">
+                <img src="images/general surgery.jpg" alt="General Surgery">
+                <a href="more-services-page5.html" class="service-link">
+                  <span class="service-text">General Surgery</span>
+                </a>
+              </div>
+              
+            </div>
+          </div>
+          <button class="carousel-button next-button">Next</button>
+        </div>
+      </section>
+      <section class="service-booking">
+        <div class="booking-message">
+          <h1>Would you need any of our services? Let us know.</h1>
+        </div>
+        <div class="booking-form">
+          <h2>would you need any of our services ,book here!</h2>
+          <form>
+            <label for="username">Name:</label>
+            <input type="text" id="username" name="username" required>
+      
+            <label for="phone">Phone Number:</label>
+            <input type="tel" id="phone" name="phone" required>
+
+            <label for="date">date for service needed</label>
+            <input type="date" id="date" name="date" required>
+      
+            <label for="reason">describe service needed:</label>
+            <textarea id="reason" name="reason" rows="4" required></textarea>
+      
+            <button type="submit">Submit Booking</button>
+          </form>
+        </div>
+      </section>
+      <footer class="footer">
+        <div class="footer-left">
+          <div class="footer-partners">
+            <h3>Our Partners</h3>
+            <img src="images/NHIF-LOGO-e1703111016373.png" alt="NHIF Logo">
+            <img src="images/KENINDIA_LOGO-removebg-preview-Copy.png" alt="Kenindia Logo">
+            <img src="images/JUBILEE-INSUARANCE-LOGO-Copy-e1703111243203.png" alt="Jubilee Insurance Logo">
+            <img src="images/HERITAGE_LOGO-removebg-preview-Copy-e1703111296490.png" alt="Heritage Insurance Logo">
+          </div>
+          <div class="footer-emergency">
+            <h3>Emergency Hotlines</h3>
+            <p>+25437365644</p>
+            <p>+25473536348</p>
+          </div>
+        </div>
+      
+        <div class="footer-center">
+          <h3>Follow Us</h3>
+          <a href="#">Facebook</a> | 
+          <a href="#">Twitter</a> | 
+          <a href="#">LinkedIn</a>
+      
+          <h3>Our Services</h3>
+          <div class="service-list">
+            <span>Medical Imaging</span>
+            <span>Radiology</span>
+            <span>CT Scans</span>
+            <span>MRI Scans</span>
+            <span>Consultation</span>
+          </div>
+        </div>
+      
+        <div class="footer-right">
+          <div class="footer-location">
+            <h3>Our Location</h3>
+            <p>1km from Gong Road towards Uthiru</p>
+            <a href="map-image-link.jpg">View Map</a>
+          </div>
+          <div class="footer-assurance">
+            <h3>Assurance to Visitors</h3>
+            <p>Your health and safety are our utmost priority. We are committed to offering the best care and services.</p>
+          </div>
+        </div>
+      </footer>
+      
+ </body>
+ </html>

@@ -1,0 +1,871 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f8fc; /* Hospital-friendly background */
+}
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #f1f1f1; /* Light gray background */
+  border-bottom: 1px solid #ccc;
+  position: relative; /* Ensure that the icon can be positioned absolutely within this */
+  z-index: 1000; /* Ensure the top-bar is above the navbar */
+}
+
+.contact-info, .visit-info {
+  font-size: 14px;
+  color: #007bff;
+  text-underline-offset: 2px;
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: bold;
+}
+
+.social-media {
+  display: flex;
+  gap: 10px; /* Space between social media icons */
+}
+
+.social-media a {
+  text-decoration: none;
+  color: #007bff; /* Blue color for social media links */
+}
+
+.social-media a:hover {
+  text-decoration: underline;
+}
+
+/* Container for logo and navbar */
+.nav-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+/* Logo styles */
+.logo {
+  margin-right: 20px;
+}
+
+.logo img {
+  height: 40px; /* Adjust as needed */
+}
+
+.navbar {
+  background-color: green;
+  position: relative;
+  width: 100%;
+  z-index: 900; /* Lower z-index so the top bar is above it */
+}
+
+.navbar ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 30px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.navbar ul li {
+  position: relative;
+}
+
+.navbar ul li a {
+  display: block;
+  padding: 15px 20px;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+}
+
+.navbar ul li a:hover {
+  background-color: #1E90FF; /* Blue hover color */
+  border-radius: 25px;
+}
+
+.navbar ul li ul.submenu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #f0f8ff; /* Light hospital-friendly background for submenu */
+  padding: 0;
+  border-radius: 10px;
+  z-index: 1;
+}
+
+.navbar ul li ul.submenu li a {
+  padding: 10px 20px;
+  color: black;
+  text-align: left;
+}
+
+.navbar ul li ul.submenu li a:hover {
+  background-color: white; /* Sky blue hover for submenu */
+  color: black;
+}
+
+/* Hover to show the submenu in desktop view */
+.navbar ul li:hover ul.submenu {
+  display: block;
+}
+
+/* Hamburger icon style */
+.icon {
+  display: none;
+  font-size: 24px;
+  padding: 15px;
+  color: black;
+  cursor: pointer;
+  position: absolute; /* Positioning for mobile view */
+  right: 20px; /* Right side alignment */
+  top: 50%; /* Center vertically */
+  transform: translateY(-50%); /* Center vertically */
+  z-index: 1000; /* Ensure it appears above other elements */
+}
+
+/* For smaller screens */
+@media screen and (max-width: 768px) {
+  .navbar ul {
+    display: none;
+    flex-direction: column;
+    background-color: green;
+    position: fixed;
+    top: 60px; /* Ensure it doesn't overlap the top-bar */
+    left: 0;
+    width: 50%; /* Only take up the left half of the screen */
+    height: calc(100% - 60px); /* Take full height minus top bar */
+    z-index: 999;
+    padding-top: 10px;
+    overflow-y: auto;
+    transition: all 0.5s ease; /* Smooth slide-down transition */
+  }
+
+  .navbar ul.show {
+    display: flex;
+  }
+
+  .navbar ul li {
+    text-align: left;
+  }
+
+  .navbar ul li a {
+    padding: 15px;
+    border-bottom: 1px solid #1E90FF;
+  }
+
+  .navbar ul li ul.submenu {
+    position: static; 
+    color: black;
+    background-color: #f0f8ff; 
+    padding: 0;
+    border-radius: 0;
+    box-shadow: none; 
+    display: none;
+    width: 100%;
+  }
+
+  .navbar ul li.show ul.submenu {
+    display: block;
+  }
+
+  .icon {
+    display: block;
+  }
+
+  /* Slide-down effect for mobile navbar */
+  .navbar ul.show {
+    animation: slideDown 0.5s forwards;
+  }
+
+  /* Keyframes for smooth slide-down */
+  @keyframes slideDown {
+    from {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  .top-bar {
+    flex-direction: column; /* Stack items vertically */
+    align-items: flex-start;
+  }
+
+  .social-media {
+    margin-top: 10px; /* Add space between contact info and social media */
+  }
+}
+/* General popup styling */
+.helpdesk-popup, .search-popup, .appointment-popup {
+  position: fixed;
+  left: 20px; /* Positioning on the left side */
+  z-index: 2; /* Make sure popups are on top */
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Helpdesk (WhatsApp) on the left */
+.helpdesk-popup {
+  bottom: 140px; /* Increased space from bottom */
+}
+
+.helpdesk-popup img {
+  width: 50px;
+  height: 50px;
+}
+
+/* Search bar in the center */
+.search-popup {
+  bottom: 80px; /* Increased space from bottom */
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 25px;
+}
+
+.search-popup input {
+  width: 200px;
+  padding: 10px;
+  border: none;
+  outline: none;
+  color: white;
+  background: transparent;
+}
+
+.search-popup button {
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.search-popup button i {
+  font-size: 20px;
+}
+
+/* Book an Appointment button on the right */
+.appointment-popup {
+  bottom: 20px; /* Increased space from bottom */
+}
+
+.appointment-popup button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+}
+
+.appointment-popup button:hover {
+  background-color: #0056b3;
+}
+
+
+@media (max-width: 768px) {
+  .helpdesk-popup,
+  .search-popup,
+  .appointment-popup {
+    left: 20px; 
+    transform: none;
+    margin-bottom: 20px; 
+  }
+
+  .helpdesk-popup {
+    bottom: 140px;
+  }
+
+  .search-popup {
+    bottom: 80px; 
+  }
+
+  .appointment-popup {
+    bottom: 20px; 
+  }
+
+  .helpdesk-popup img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .search-popup input {
+    width: 150px;
+  }
+
+  .appointment-popup button {
+    padding: 8px 16px;
+  }
+}
+
+.slider {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transition: transform 1s ease-in-out, opacity 1s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: scale(0.8) translateX(100%); 
+  opacity: 0;
+}
+
+.slide.active {
+  transform: scale(1.05) translateX(0); 
+  opacity: 1;
+}
+
+.slide.exit {
+  transform: scale(0.8) translateX(-100%); 
+}
+
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1s ease-in-out; 
+}
+
+
+.slide.active img {
+  transform: scale(1.1); 
+}
+
+
+.slide:nth-child(1)::before,
+.slide:nth-child(2)::before,
+.slide:nth-child(3)::before,
+.slide:nth-child(4)::before
+ {
+  content: '';
+  position: absolute;
+  bottom: 50px;
+  left: 0;
+  width: 100%;
+  height: calc(100% - 100px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.slide:nth-child(1)::before {
+  background: linear-gradient(to top right, rgba(0, 0, 255, 0.6), transparent);
+}
+
+.slide:nth-child(2)::before {
+  background: linear-gradient(to top right, rgba(0, 255, 0, 0.6), transparent);
+}
+
+.slide:nth-child(3)::before {
+  background: linear-gradient(to top right, rgba(128, 0, 128, 0.6), transparent);
+}
+.slide:nth-child(4)::before {
+  background: linear-gradient(to top right, rgba(13, 218, 40, 0.6), transparent);
+}
+
+
+.slide::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  background: rgba(0, 0, 255, 0.6); 
+  z-index: 0;
+}
+
+
+.slide:nth-child(1)::after {
+  background: rgba(0, 0, 255, 0.6);
+}
+
+.slide:nth-child(2)::after {
+  background: rgba(0, 255, 0, 0.6);
+}
+
+.slide:nth-child(3)::after {
+  background: rgba(128, 0, 128, 0.6);
+}
+
+.slide:nth-child(4)::after {
+  background: rgba(22, 255, 72, 0.6);
+}
+
+.message {
+  position: absolute;
+  bottom: 50%; 
+  left: 50%;
+  transform: translateX(-50%); 
+  background: rgba(0, 0, 0, 0.6); 
+  color: blue;
+  font-size: 2em;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  font-family: 'Times New Roman', Times, serif; 
+  padding: 15px 25px; 
+  border-radius: 10px; 
+  z-index: 1;
+  box-sizing: border-box; 
+}
+
+@media (max-width: 768px) {
+  .slider {
+      height: 50vh; 
+  }
+
+  .message {
+      font-size: 1.5em; 
+      padding: 10px 15px;
+      bottom: 20px; 
+  }
+}
+
+
+.about-us {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.image-div {
+  position: relative;
+  width: 40%;
+  overflow: hidden;
+  height: auto;
+}
+
+.image-div img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.vision-mission-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: medium;
+  font-weight: bold;
+}
+
+.message-div {
+  width: 80%;
+  background-color: rgba(0, 0, 0, 0.2);
+  color: black;
+  border-radius: 15px;
+  padding: 20px;
+  margin-top: 20px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+@media (max-width: 768px) {
+  .image-div {
+      width: 100%; 
+  }
+
+  .message-div {
+      width: 100%;
+  }
+}
+.about-us {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.image-div {
+  position: relative;
+  width: 40%;
+  overflow: hidden;
+  height: auto;
+}
+
+.image-div img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.vision-mission-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: medium;
+  font-weight: bold;
+}
+
+.message-div {
+  width: 80%;
+  background-color: rgba(0, 0, 0, 0.2);
+  color: black;
+  border-radius: 15px;
+  padding: 20px;
+  margin-top: 20px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+@media (max-width: 768px) {
+  .image-div {
+      width: 100%; 
+  }
+
+  .message-div {
+      width: 100%;
+  }
+}
+
+.about-us {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.image-div {
+  position: relative;
+  width: 40%;
+  overflow: hidden;
+  height: auto;
+}
+
+.image-div img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.vision-mission-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  text-align: center;
+}
+
+.message-div {
+  width: 55%;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 50px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.message-container h1 {
+  font-family: 'Cursive', sans-serif;
+  font-size: 2.5rem;
+  color: #003366;
+}
+
+.message-container p {
+  font-size: 1.2rem;
+  line-height: 1.5;
+  color: #333;
+}
+
+/* Responsive Design for Mobile */
+@media screen and (max-width: 768px) {
+  .about-us {
+      flex-direction: column;
+      align-items: center;
+  }
+
+  .image-div, .message-div {
+      width: 100%;
+      margin-bottom: 20px;
+  }
+
+  .message-div {
+      border-radius: 20px;
+      padding: 15px;
+  }
+}
+/* General Styles */
+/* General Styles */
+.services-section {
+  padding: 20px;
+  background-color: #f4f4f4;
+  position: relative;
+}
+
+.carousel-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.carousel-wrapper {
+  flex: 1;
+  overflow: hidden;
+}
+
+.services-container {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+
+.service-item {
+  flex: 0 0 auto; /* Prevent items from growing or shrinking */
+  margin: 0 20px; /* Moderate space between items */
+  position: relative; /* To position the overlay */
+  border-radius: 10px;
+  text-align: center;
+}
+
+.service-item img {
+  width: 250px; /* Moderate size for the images */
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  border-radius: 10px;
+}
+
+.service-link {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background: blue;
+  color: white;
+  padding:20px;
+  text-decoration: none;
+  border-radius: 20px; /* Oval shape */
+  width: auto; /* Adjust to fit content */
+  white-space: nowrap; /* Prevent text wrapping */
+}
+
+.service-link:hover {
+  background-color: darkblue;
+}
+
+.service-text {
+  font-size: 1em; /* Adjust font size for better fit */
+}
+
+/* Carousel Buttons */
+.carousel-button {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  z-index: 2;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.prev-button {
+  left: 10px;
+}
+
+.next-button {
+  right: 10px;
+}
+
+/* Responsive Styles */
+@media (max-width: 480px) {
+  .service-item {
+    width: 80vw; /* Viewport width for smaller screens */
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .service-item {
+    width: 45vw; /* Adjust for medium screens */
+  }
+}
+
+@media (min-width: 769px) {
+  .service-item {
+    width: 30vw; /* Adjust for larger screens */
+  }
+}
+
+.service-booking {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.booking-message {
+  width: 30%;
+  font-family: 'Cursive', sans-serif;
+  color: blue;
+  font-size: 2rem;
+}
+
+.booking-form {
+  width: 65%;
+  background: linear-gradient(to bottom, rgb(85, 85, 233), #f0ffb6);
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.booking-form h2 {
+  margin-bottom: 15px;
+}
+
+.booking-form label {
+  display: block;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.booking-form input, .booking-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+}
+
+.booking-form button {
+  margin-top: 15px;
+  padding: 10px 20px;
+  background-color: blue;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.booking-form button:hover {
+  background-color: darkblue;
+}
+
+/* Media Query for Mobile View */
+@media (max-width: 768px) {
+  .service-booking {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .booking-message, .booking-form {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .booking-message h1 {
+    text-align: center;
+  }
+}
+.footer {
+  display: flex;
+  justify-content: space-between;
+  background: linear-gradient(to top, rgba(173, 216, 230, 0.8), rgba(173, 216, 230, 0.4) 50%, rgba(144, 238, 144, 0.4) 50%, rgba(144, 238, 144, 0.8));
+  color: #333;
+  padding: 20px;
+  flex-wrap: wrap;
+}
+
+.footer-left, .footer-center, .footer-right {
+  width: 30%;
+}
+
+.footer h3 {
+  color: #0056b3; /* Friendly hospital-themed color */
+}
+
+.footer p, .footer a {
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+.footer-partners img {
+  width: 50px; /* Adjust size as needed */
+  margin: 5px;
+}
+
+.footer-emergency p, .footer-location p {
+  margin: 5px 0;
+}
+
+.footer-right p {
+  margin-top: 15px;
+}
+
+.footer a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.footer-location {
+  text-align: right; /* Align location div to the right */
+}
+
+.service-list {
+  display: inline-block;
+  margin-top: 10px;
+}
+
+.service-list span {
+  display: inline-block;
+  margin: 5px;
+  padding: 5px 10px;
+  background-color: #f0f0f0;
+  border-radius: 10px;
+}
+
+@media (max-width: 768px) {
+  .footer-left, .footer-center, .footer-right {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}
+
+
+  

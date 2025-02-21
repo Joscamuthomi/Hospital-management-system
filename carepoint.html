@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Management System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .sidebar {
+            height: 100%;
+            width: 250px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #0d47a1;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 20px;
+        }
+
+        .sidebar a {
+            padding: 15px 20px;
+            text-decoration: none;
+            font-size: 18px;
+            color: #fff;
+            display: block;
+            transition: 0.3s;
+            margin-bottom: 10px;
+            background-color: #0b3d91;
+            border-radius: 8px;
+        }
+
+        .sidebar a:hover {
+            background-color: #082a69;
+        }
+
+        .sidebar a i {
+            margin-right: 10px;
+        }
+
+        .submenu, .sub-submenu {
+            display: none;
+            padding-left: 20px;
+        }
+
+        .submenu a {
+            font-size: 16px;
+            background-color: #189b64;
+        }
+
+        .submenu a:hover {
+            background-color: #34af1c;
+        }
+
+        .sub-submenu a {
+            font-size: 14px;
+            background-color: #a5df1f;
+        }
+
+        .sub-submenu a:hover {
+            background-color: #dfbf0c;
+        }
+
+        .toggle-btn {
+            position: absolute;
+            top: 10px;
+            left: 260px;
+            font-size: 20px;
+            cursor: pointer;
+            display: none;
+        }
+
+        @media screen and (max-width: 768px) {
+            .sidebar {
+                width: 0;
+                padding-top: 60px;
+            }
+
+            .toggle-btn {
+                display: block;
+                left: 10px;
+            }
+        }
+
+        .content-frame {
+            margin-left: 250px;
+            padding: 20px;
+            width: calc(100% - 250px);
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        iframe {
+            width: 100%;
+            height: calc(100% - 40px);
+            border: none;
+            margin-top: 5px;
+        }
+
+        @media screen and (max-width: 768px) {
+            .content-frame {
+                margin-left: 0;
+                width: 100%;
+                height: 100vh;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="sidebar" id="sidebar">
+    <a href="dashboard.html" target="content-frame"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+    <a href="#patient-management" onclick="toggleMenu('patient-management-submenu')">
+        <i class="fas fa-user-injured"></i> Patient Management
+    </a>
+    <div class="submenu" id="patient-management-submenu">
+        <a href="inpatient management.html" target="content-frame" onclick="toggleMenu('inpatient-management-submenu')">
+            <i class="fas fa-bed"></i> Inpatient Management
+        </a>   
+        <a href="outpatient management.html" target="content-frame" onclick="toggleMenu('inpatient-management-submenu')">
+            <i class="fas fa-bed"></i> Outpatient Management
+        </a>   
+    </div>
+    
+    <a href="#clinical-management" onclick="toggleMenu('clinical-management-submenu')">
+        <i class="fas fa-clinic-medical"></i> Clinical Management
+    </a>
+    <div class="submenu" id="clinical-management-submenu">
+        <a href="#diagnostics-records"><i class="fas fa-file-medical-alt"></i> Diagnostics Records</a>
+        <a href="#treatment-plans"><i class="fas fa-notes-medical"></i> Treatment Plans</a>
+        <a href="#referral-management"><i class="fas fa-user-md"></i> Referral Management</a>
+        <a href="#ambulance-management"><i class="fas fa-ambulance"></i> Ambulance Management</a>
+        <a href="#pharmacy-management"><i class="fas fa-pills"></i> Pharmacy Management</a>
+    </div>
+    <a href="#billing-insurance" onclick="toggleMenu('billing-insurance-submenu')">
+        <i class="fas fa-file-invoice-dollar"></i> Billing and Insurance
+    </a>
+    <div class="submenu" id="billing-insurance-submenu">
+        <a href="#billing-management"><i class="fas fa-receipt"></i> Billing Management</a>
+        <a href="#insurance-management"><i class="fas fa-umbrella"></i> Insurance Management</a>
+        <a href="#payments"><i class="fas fa-credit-card"></i> Payments</a>
+        <a href="#financial-assistance"><i class="fas fa-hand-holding-usd"></i> Financial Assistance</a>
+        <a href="#billing-faq"><i class="fas fa-question-circle"></i> Billing FAQ's</a>
+    </div>
+    <a href="#appointments" onclick="toggleMenu('appointments-submenu')">
+        <i class="fas fa-calendar-alt"></i> Appointments
+    </a>
+    <div class="submenu" id="appointments-submenu">
+        <a href="#appointments-calendar"><i class="fas fa-calendar"></i> Appointments Calendar</a>
+        <a href="#upcoming-appointments"><i class="fas fa-clock"></i> Upcoming Appointments</a>
+        <a href="#manage-appointments"><i class="fas fa-tasks"></i> Manage Appointments</a>
+    </div>
+    <a href="#reports" onclick="toggleMenu('reports-submenu')">
+        <i class="fas fa-chart-line"></i> Reports
+    </a>
+    <div class="submenu" id="reports-submenu">
+        <a href="#patients-reports"><i class="fas fa-file-medical"></i> Patients Reports</a>
+        <a href="#clinical-reports"><i class="fas fa-notes-medical"></i> Clinical Reports</a>
+        <a href="#financial-reports"><i class="fas fa-dollar-sign"></i> Financial Reports</a>
+        <a href="#inventory-reports"><i class="fas fa-boxes"></i> Inventory Reports</a>
+    </div>
+    <a href="#hr-management" onclick="toggleMenu('hr-management-submenu')">
+        <i class="fas fa-users"></i> HR Management
+    </a>
+    <div class="submenu" id="hr-management-submenu">
+        <a href="#employees-records"><i class="fas fa-address-book"></i> Employees Records</a>
+        <a href="#shift-management"><i class="fas fa-clock"></i> Shift Management</a>
+        <a href="#leave-management"><i class="fas fa-calendar-day"></i> Leave Management</a>
+    </div>
+    
+    <a href="staff login.html" target="content-frame">
+        <i class="fas fa-user-nurse"></i> Staff Portal
+    </a>
+    <a href="patient-login.html" target="content-frame">
+        <i class="fas fa-procedures"></i> Patients Portal
+    </a>
+</div>
+
+<span class="toggle-btn" onclick="toggleSidebar()">&#9776;</span>
+
+<div class="content-frame">
+    <iframe src="dashboard.html" name="content-frame"></iframe>
+</div>
+<div class="content-frame"></div>
+    <iframe src="" name="content-frame"></iframe>
+</div>
+<script>
+    function toggleMenu(id) {
+        const menu = document.getElementById(id);
+        const isDisplayed = menu.style.display === 'block';
+        document.querySelectorAll('.submenu, .sub-submenu').forEach(sub => sub.style.display = 'none');
+        if (!isDisplayed) menu.style.display = 'block';
+    }
+
+    function toggleSidebar() {
+        const sidebar = document.getElementById('sidebar');
+        const isSidebarVisible = sidebar.style.width !== '0px';
+        sidebar.style.width = isSidebarVisible ? '0px' : '250px';
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Admissions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        .notification {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 20px;
+            width: 300px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+            position: relative;
+            margin: 50px auto;
+        }
+        .notification h2 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .notification div {
+            display: table;
+            width: 100%;
+            margin-bottom: 15px;
+        }
+        .notification div button {
+            width: auto;
+            padding: 5px 10px;
+            font-size: 14px;
+            cursor: pointer;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            display: inline-block;
+            margin-left: 5px;
+        }
+        .notification div button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="notification">
+        <h2>Admission Options</h2>
+        <div>
+            <button onclick="window.location.href='admision form.html'">Admit a New Patient</button>
+        </div>
+        <div>
+            <button onclick="window.location.href='patient_list.php'">View Patient Admission Records</button>
+        </div>
+    </div>
+</body>
+</html>

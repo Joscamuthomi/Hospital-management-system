@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Robins Hospital</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            height: 100%;
+            width: 100%;
+            position: relative;
+        }
+
+        /* Word animation styling */
+        .animated-word {
+            position: absolute;
+            font-size: 50px;
+            color: rgba(255, 0, 0, 0); /* Start almost invisible */
+            text-decoration: underline;
+            z-index: 100;
+            animation: wordAnimation 5s ease-in-out forwards;
+        }
+
+        /* Keyframes for word animation */
+        @keyframes wordAnimation {
+            0% {
+                font-size: 80px;
+                top: 50%;
+                left: 50%;
+                color: rgba(255, 0, 0, 0); /* Invisible */
+                z-index: 1000;
+            }
+            50% {
+                color: rgba(255, 0, 0, 1); /* Fully visible */
+                z-index: 100;
+            }
+            100% {
+                top: 10px;
+                font-size: 30px;
+                color: blue; 
+                z-index: 10;
+            }
+        }
+
+        /* Custom final positions for each word */
+        .animated-word:nth-child(1) {
+            animation-delay: 0s;
+        }
+        .animated-word:nth-child(1) @keyframes wordAnimation {
+            100% {
+                left: 10px;
+            }
+        }
+
+        .animated-word:nth-child(2) {
+            animation-delay: 3s;
+        }
+        .animated-word:nth-child(2) @keyframes wordAnimation {
+            100% {
+                left: 180px;
+            }
+        }
+
+        .animated-word:nth-child(3) {
+            animation-delay: 2s;
+        }
+        .animated-word:nth-child(3) @keyframes wordAnimation {
+            100% {
+                left: 350px;
+            }
+        }
+
+        /* Larger "R" animation */
+        .animated-logo {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 120px;
+            color: #000;
+            text-align: center;
+            animation: rotateR 8s linear infinite;
+        }
+
+        /* Surrounding oval effect */
+        .oval {
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            width: 200px;
+            height: 150px;
+            border: 5px solid #ff69b4; /* Flowery color */
+            border-radius: 50%;
+            animation: rotateOval 8s linear infinite;
+        }
+
+        /* Keyframes for rotating the "R" */
+        @keyframes rotateR {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Keyframes for rotating the oval */
+        @keyframes rotateOval {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(-360deg);
+            }
+        }
+
+        .homepage-image-container {
+            position: relative;
+            max-width: 100%;
+            height: 80vh; 
+            margin-bottom: 20px;
+            overflow: hidden;
+            border-radius: 2px;
+        }
+
+        .homepage-image-container img {
+            width: 100%;
+            height: 100%;
+            max-height: 80vh;
+            object-fit: cover; 
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .homepage-text {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            color: blue;
+            background-color: rgba(0, 0, 0, 0.5); 
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 24px;
+            z-index: 1000; 
+        }
+
+        .care-point {
+            text-align: center;
+            font-size: 70px;
+            font-weight: bold;
+            margin-top: 20px;
+            color: blue;
+            bottom: 50%;
+            left: 50px;
+            z-index: 1000;
+            position: relative;
+            font-family: 'cursive', 'Times New Roman', Times, serif;
+        }
+
+        .icon-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin-top: 30px;
+            position: absolute;
+            top: 10%;
+            z-index: 1000;
+        }
+
+        .icon {
+            color: rgb(15, 6, 39);
+            font-size: 30px;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 15px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            position: relative;
+            margin-left: 50px;
+        }
+
+        .icon-description {
+            text-align: center;
+            color: #000;
+            margin-top: 5px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .footer {
+            background-color: #05b9b0;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .footer a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold; 
+        }
+        h1{
+            position: relative;
+            top: 10%;
+            left: 10%;
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="homepage-image-container">
+        <div class="icon-container">
+            <div class="icon"><i class="fas fa-hospital"></i><div class="icon-description">Overview</div></div>
+            <div class="icon"><i class="fas fa-user-md"></i><div class="icon-description">Doctors</div></div>
+            <div class="icon"><i class="fas fa-procedures"></i><div class="icon-description">Patients</div></div>
+            <div class="icon"><i class="fas fa-calendar-check"></i><div class="icon-description">Appointments</div></div>
+            <div class="icon"><i class="fas fa-file-invoice"></i><div class="icon-description">Billing</div></div>
+            <div class="icon"><i class="fas fa-phone-alt"></i><div class="icon-description">Contact</div></div>
+            <div class="icon"><i class="fas fa-user-plus"></i><div class="icon-description">Add Patient</div></div>
+            <div class="icon"><i class="fas fa-notes-medical"></i><div class="icon-description">Records</div></div>
+            <div class="icon"><i class="fas fa-chart-line"></i><div class="icon-description">Statistics</div></div>
+            <div class="icon"><i class="fas fa-comments"></i><div class="icon-description">Feedback</div></div>
+        </div>
+
+        <img src="images/heart-stethoscope.jpg" alt="Robins Hospital">
+        <div class="care-point">Care Point</div>
+
+        <div class="homepage-text">People's health is our priority, responsibility, and way of life</div>
+    </div>
+
+    <!-- Animated words -->
+    <div class="animated-word" style="top: 40%; left: 10%;">Planning.</div>
+    <div class="animated-word" style="top: 50%; left: 25%; animation-delay: 1s;">Analysis.</div>
+    <div class="animated-word" style="top: 60%; left: 40%; animation-delay: 2s;">Innovation  </div>
+
+    <!-- Rotating "R" logo with oval -->
+    <div class="animated-logo">
+        R
+        <div class="oval"></div>
+    </div>
+
+    <div class="footer">
+        <a href="user regestration.html">User regestration</a>
+
+        <a href="#">FAQs</a>
+        <a href="#">IT Support</a>
+        <a href="#">Notifications</a>
+    </div>
+
+    <script>
+        // Function to reset the animation
+        function resetAnimation() {
+            const words = document.querySelectorAll('.animated-word');
+            words.forEach(word => {
+                word.style.animation = 'none'; // Reset animation
+                word.offsetHeight; // Trigger reflow
+                word.style.animation = ''; // Reapply animation
+            });
+        }
+
+        // Reset the animation every 10 minutes
+        setInterval(resetAnimation, 10 * 60 * 1000);
+    </script>
+
+</body>
+</html>

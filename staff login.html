@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(to top, #ADFF2F, #ffffff);
+        }
+        .container {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            flex-direction: row;
+        }
+        .login-form {
+            flex: 1;
+            max-width: 33%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 20px;
+            background: linear-gradient(to top, #2f66ff, #ffffff);
+        }
+        .login-form label {
+            margin-bottom: 5px;
+            color: blue;
+        }
+        .login-form input {
+            margin-bottom: 10px;
+            padding: 10px;
+            width: 100%;
+            max-width: 300px;
+            border: none;
+            border-bottom: 2px solid white;
+            background: transparent;
+            color:black;
+        }
+        .login-form button {
+            padding: 10px;
+            width: 100%;
+            max-width: 320px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .login-form button:hover {
+            background-color: #45a049;
+        }
+        .image-container {
+            flex: 2;
+            max-width: 67%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        .image-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to top, rgba(0, 0, 255, 0.5), rgba(0, 0, 255, 0.1));
+            z-index: 1;
+        }
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+        }
+        .welcome-message {
+            position: absolute;
+            color: rgb(36, 230, 11);
+            font-size: 24px;
+            text-align: center;
+            z-index: 2; 
+        }
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column-reverse;
+            }
+            .login-form, .image-container {
+                width: 100%;
+                height: auto; 
+            }
+            .login-form {
+                padding: 20px;
+                max-width: none;
+                background: linear-gradient(to top, #2f78ff, #ffffff);
+            }
+            .image-container {
+                height: 50%; 
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="login-form">
+            <h2>staff Login</h2>
+            <label for="name">Name</label>
+            <input type="text" id="name" placeholder="Name" required>
+            <label for="id">ID</label>
+            <input type="text" id="id" placeholder="ID" required>
+            <button type="submit">Login</button>
+        </div>
+        <div class="image-container">
+            <img src="images/clinical mang2.jpg" alt="Medical Image">
+            <div class="welcome-message">Welcome user</div>
+        </div>
+    </div>
+</body>
+</html>

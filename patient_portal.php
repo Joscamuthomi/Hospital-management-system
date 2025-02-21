@@ -1,0 +1,244 @@
+<?php
+// Example code in your login logic
+
+
+session_start();
+
+if (!isset($_SESSION['username']) || $_SESSION['status'] !== 'Patient') {
+    header("Location: login.php");
+    exit();
+}
+
+
+include 'db_connection.php'; // Ensure this path is correct
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Portal</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            display: flex;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .sidebar {
+            width: 250px;
+            background: #35424a;
+            color: #ffffff;
+            position: fixed;
+            height: 100%;
+            overflow-y: auto;
+            transition: width 0.3s;
+         
+        }
+
+        .sidebar a {
+            display: block;
+            padding: 15px;
+            color: #ffffff;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar a:hover {
+            background: #2a2e32;
+        }
+
+        .submenu {
+            display: none;
+            padding-left: 20px;
+            background: #2a2e32;
+        }
+
+        .submenu a {
+            padding: 10px;
+            color: #ffffff;
+        }
+
+        .content-frame {
+            margin-left: 250px;
+            padding: 20px;
+            flex-grow: 1;
+        }
+
+        iframe {
+            width: 100%;
+            height: calc(100vh - 40px);
+            border: none;
+        }
+
+        .toggle-btn {
+            font-size: 24px;
+            cursor: pointer;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 1000;
+            color: blue;
+        }
+
+        h1 {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+<div class="sidebar" id="sidebar">
+    <!-- Dashboard Menu -->
+    <a href="javascript:void(0);" onclick="loadDashboard();"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+
+    <!-- Personal Health Information Access -->
+    <a href="patient_record_view.php" onclick="toggleMenu('personal-health-submenu')"  >
+        <i class="fas fa-folder-medical"></i> Personal Health Information
+    </a>
+    
+
+    <!-- Appointment Scheduling -->
+    <a href="#appointments" onclick="toggleMenu('appointments-submenu')">
+        <i class="fas fa-calendar-alt"></i> Appointments
+    </a>
+    <div class="submenu" id="appointments-submenu">
+        <a href="appointment_booking.php" target="content-frame"><i class="fas fa-calendar-plus"></i> Book Appointment</a>
+        <a href="upcoming_appointments.php" target="content-frame"><i class="fas fa-clock"></i> Upcoming Appointments</a>
+    </div>
+
+    <!-- Prescription Management -->
+    <a href="prescription_view.php" onclick="toggleMenu('prescriptions-submenu')">
+        <i class="fas fa-pills"></i> Prescriptions
+    </a>
+    
+    <!-- Secure Messaging -->
+    <a href="#secure-messaging" onclick="toggleMenu('secure-messaging-submenu')">
+        <i class="fas fa-comment-dots"></i> Secure Messaging
+    </a>
+    <div class="submenu" id="secure-messaging-submenu">
+        <a href="send_message.php" target="content-frame"><i class="fas fa-paper-plane"></i> Send a Message</a>
+        <a href="message_history.php" target="content-frame"><i class="fas fa-history"></i> Message History</a>
+    </div>
+
+    <!-- Access to Medical Reports -->
+    <a href="#medical-reports" onclick="toggleMenu('medical-reports-submenu')">
+        <i class="fas fa-file-download"></i> Medical Reports
+    </a>
+    <div class="submenu" id="medical-reports-submenu">
+        <a href="download_reports.php" target="content-frame"><i class="fas fa-file-pdf"></i> Download Reports</a>
+    </div>
+
+    <!-- Health Tracking -->
+    <a href="#health-tracking" onclick="toggleMenu('health-tracking-submenu')">
+        <i class="fas fa-heartbeat"></i> Health Tracking
+    </a>
+    <div class="submenu" id="health-tracking-submenu">
+        <a href="upload_health_data.php" target="content-frame"><i class="fas fa-upload"></i> Upload Health Data</a>
+        <a href="view_health_trends.php" target="content-frame"><i class="fas fa-chart-line"></i> View Health Trends</a>
+    </div>
+
+    <!-- Emergency Contact Information -->
+    <a href="emergency_contacts.php" target="content-frame"><i class="fas fa-user-plus"></i> Emergency Contacts</a>
+
+    <!-- Referral Management -->
+    <a href="#referral-management" onclick="toggleMenu('referral-management-submenu')">
+        <i class="fas fa-user-md"></i> Referral Management
+    </a>
+    <div class="submenu" id="referral-management-submenu">
+        <a href="download_referral_form.php" target="content-frame"><i class="fas fa-download"></i> Download Referral Form</a>
+        <a href="refer_patient.php" target="content-frame"><i class="fas fa-paper-plane"></i> Refer a Patient</a>
+    </div>
+
+    <!-- Task Reminders -->
+    <a href="task_reminders.php" target="content-frame"><i class="fas fa-tasks"></i> Task Reminders</a>
+</div>
+
+<span class="toggle-btn" onclick="toggleSidebar()">&#9776;</span>
+
+
+<div class="content-frame">
+    <iframe src="about:blank" name="content-frame" id="content-frame"></iframe>
+    <script>
+        function loadDashboard() {
+            const username = "<?php echo htmlspecialchars($_SESSION['username']); ?>"; 
+            document.getElementById("content-frame").srcdoc = `
+                <html>
+                <head>
+                    <title>Dashboard</title>
+                    <style>
+                        body {
+                            margin: 0;
+                            padding: 0;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            height: 100vh;
+                            background-color: #f0f0f0;
+                            font-family: Arial, sans-serif;
+                        }
+                        .image-container {
+                            position: relative;
+                            width: 100%;
+                            height: 100%;
+                        }
+                        .image-container img {
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                            border-radius: 15px;
+                        }
+                        .overlay {
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            right: 0;
+                            bottom: 0;
+                            background: linear-gradient(to top, rgba(0, 0, 255, 0.5), rgba(0, 0, 255, 0));
+                            border-radius: 15px;
+                        }
+                        .content {
+                            position: absolute;
+                            top: 20px;
+                            left: 20px;
+                            color: white;
+                            font-size: 24px;
+                            font-weight: bold;
+                            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class="image-container">
+                        <img src="images/reception.jpg" alt="">
+                        <div class="overlay"></div>
+                        <div class="content">Welcome ${username}!</div>
+                    </div>
+                </body>
+                </html>
+            `;
+        }
+
+        function toggleMenu(id) {
+            const menu = document.getElementById(id);
+            const isDisplayed = menu.style.display === 'block';
+            document.querySelectorAll('.submenu').forEach(sub => sub.style.display = 'none');
+            if (!isDisplayed) menu.style.display = 'block';
+        }
+
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const isSidebarVisible = sidebar.style.width !== '0px';
+            sidebar.style.width = isSidebarVisible ? '0px' : '250px';
+            document.querySelector('.content-frame').style.marginLeft = isSidebarVisible ? '0' : '250px';
+        }
+
+        // Load dashboard on page load
+        window.onload = loadDashboard;
+    </script>
+</div>
+
+</body>
+</html>

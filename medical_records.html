@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Records</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .form-group {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        label {
+            margin-right: 10px;
+            flex: 0 0 200px;
+            min-width: 120px;
+            font-weight: bold;
+        }
+        input[type="text"], input[type="date"], textarea {
+            padding: 8px; 
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 100%;
+            max-width: 400px; 
+            margin-bottom: 5px; 
+            font-size: 0.9em;
+            box-sizing: border-box; 
+        }
+        .submit-btn {
+            display: inline-block;
+            padding: 10px 15px; 
+            font-size: 14px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+            margin-top: 5px; 
+            width: auto; 
+        }
+        .submit-btn:hover {
+            background-color: #1ce626;
+        }
+    </style>
+    <script>
+        function submitAllVitalSigns() {
+            const patientId = document.getElementById("patientId").value;
+            const doctorName = document.getElementById("doctorName").value;
+            const bloodPressure = document.getElementById("bloodPressure").value;
+            const heartRate = document.getElementById("heartRate").value;
+            const respiratoryRate = document.getElementById("respiratoryRate").value;
+            const temperature = document.getElementById("temperature").value;
+
+            if (patientId && doctorName) {
+                const xhr = new XMLHttpRequest();
+                xhr.open("POST", "save_medical_record.php", true);
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xhr.onload = function() {
+                    if (this.status === 200) {
+                        alert(this.responseText);
+                    } else {
+                        alert("Error saving record.");
+                    }
+                };
+                // Create a single recordData string with all vital signs
+                const recordData = `Blood Pressure: ${encodeURIComponent(bloodPressure)}; Heart Rate: ${encodeURIComponent(heartRate)}; Respiratory Rate: ${encodeURIComponent(respiratoryRate)}; Temperature: ${encodeURIComponent(temperature)}`;
+                xhr.send(`patientId=${patientId}&doctorName=${doctorName}&recordType=Vital Signs&recordData=${recordData}`);
+            } else {
+                alert("Please fill out all fields before saving.");
+            }
+        }
+
+        function submitMedicalSection(sectionId, sectionType) {
+            const recordData = document.getElementById(sectionId).value;
+            const patientId = document.getElementById("patientId").value;
+            const doctorName = document.getElementById("doctorName").value;
+
+            if (recordData && patientId && doctorName) {
+                const xhr = new XMLHttpRequest();
+                xhr.open("POST", "save_medical_record.php", true);
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xhr.onload = function() {
+                    if (this.status === 200) {
+                        alert(this.responseText);
+                    } else {
+                        alert("Error saving record.");
+                    }
+                };
+                xhr.send(`patientId=${patientId}&doctorName=${doctorName}&recordType=${sectionType}&recordData=${encodeURIComponent(recordData)}`);
+            } else {
+                alert("Please fill out all fields before saving.");
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Patient Medical Records</h1>
+        <form class="medical-records-form">
+            <div class="form-group">
+                <label for="patientId">Patient ID:</label>
+                <input type="text" id="patientId" name="patientId" required>
+            </div>
+            <div class="form-group">
+                <label for="doctorName">Doctor/Staff Name:</label>
+                <input type="text" id="doctorName" name="doctorName" required>
+            </div>
+
+            <!-- Vital Signs Section -->
+            <h2>Vital Signs</h2>
+            <div class="form-group">
+                <label for="bloodPressure">Blood Pressure:</label>
+                <input type="text" id="bloodPressure" placeholder="e.g., 120/80">
+            </div>
+            <div class="form-group">
+                <label for="heartRate">Heart Rate (bpm):</label>
+                <input type="text" id="heartRate">
+            </div>
+            <div class="form-group">
+                <label for="respiratoryRate">Respiratory Rate (breaths/min):</label>
+                <input type="text" id="respiratoryRate">
+            </div>
+            <div class="form-group">
+                <label for="temperature">Temperature (°C):</label>
+                <input type="text" id="temperature">
+            </div>
+            <button type="button" class="submit-btn" onclick="submitAllVitalSigns()">Save All Vital Signs</button>
+
+            <!-- Medical History -->
+            <h2>Medical History</h2>
+            <div class="form-group">
+                <textarea id="medicalHistory" rows="4" placeholder="Enter medical history"></textarea>
+                <button type="button" class="submit-btn" onclick="submitMedicalSection('medicalHistory', 'Medical History')">Save Medical History</button>
+            </div>
+
+            <!-- Current Medications -->
+            <h2>Current Medications</h2>
+            <div class="form-group">
+                <textarea id="currentMedications" rows="4" placeholder="Enter current medications"></textarea>
+                <button type="button" class="submit-btn" onclick="submitMedicalSection('currentMedications', 'Current Medications')">Save Current Medications</button>
+            </div>
+
+            <!-- Allergies -->
+            <h2>Allergies</h2>
+            <div class="form-group">
+                <textarea id="allergies" rows="4" placeholder="Enter allergies"></textarea>
+                <button type="button" class="submit-btn" onclick="submitMedicalSection('allergies', 'Allergies')">Save Allergies</button>
+            </div>
+
+            <!-- Consultation Notes -->
+            <h2>Consultation Notes</h2>
+            <div class="form-group">
+                <textarea id="consultationNotes" rows="4" placeholder="Enter consultation notes"></textarea>
+                <button type="button" class="submit-btn" onclick="submitMedicalSection('consultationNotes', 'Consultation Notes')">Save Consultation Notes</button>
+            </div>
+
+            <!-- Lab Test Results -->
+            <h2>Lab Test Results</h2>
+            <div class="form-group">
+                <textarea id="labResults" rows="4" placeholder="Enter lab test results"></textarea>
+                <button type="button" class="submit-btn" onclick="submitMedicalSection('labResults', 'Lab Test Results')">Save Lab Test Results</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

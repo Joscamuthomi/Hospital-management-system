@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HMS Reception Dashboard Features</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        /* Navbar Styling */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #4CAF50;
+            padding: 10px;
+            color: rgb(46, 13, 233);
+            justify-content: space-around;
+        }
+
+        .navbar h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .navbar ul {
+            list-style-type: none;
+           
+            padding: 0;
+            display: flex;
+            
+        }
+
+        .navbar ul li {
+            position: relative;
+            padding: 10px;
+            cursor: pointer;
+            justify-content: space-between;
+        }
+
+        .navbar ul li:hover {
+            background-color: #3e8e41;
+        }
+
+        .navbar ul li a {
+            color: rgb(55, 6, 230);
+            text-decoration: none;
+        }
+
+        /* Submenu styling */
+        .navbar ul ul {
+            display: none;
+            position: absolute;
+            top: 40px;
+            left: 0;
+            background-color: #4CAF50;
+            padding: 0;
+            list-style-type: none;
+        }
+
+        .navbar ul li:hover > ul {
+            display: block;
+        }
+
+        .navbar ul ul li {
+            padding: 10px;
+            width: 200px;
+        }
+
+        .navbar ul ul li:hover {
+            background-color: #3e8e41;
+        }
+
+        /* Responsive Toggle Menu */
+        .navbar .toggle {
+            display: none;
+            font-size: 30px;
+            cursor: pointer;
+        }
+
+        /* Content styling */
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        h2 {
+            color: #333;
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 10px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        ul li {
+            background-color: #f9f9f9;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-left: 5px solid #4CAF50;
+            border-radius: 5px;
+        }
+
+        ul li:hover {
+            background-color: #e9e9e9;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 14px;
+        }
+
+        /* Responsive Styles */
+        @media screen and (max-width: 768px) {
+            .navbar ul {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .navbar ul li {
+                width: 100%;
+                text-align: center;
+            }
+
+            .navbar ul ul {
+                position: static;
+            }
+
+            .navbar .toggle {
+                display: block;
+            }
+
+            .navbar.active ul {
+                display: flex;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <h1>HMS Dashboard</h1>
+        <span class="toggle" onclick="toggleMenu()">&#9776;</span>
+        <ul>
+            <li>Patient Management
+                <ul>
+                    <li><a href="#">Patient Registration</a></li>
+                    <li><a href="#">Check-In & Check-Out</a></li>
+                    <li><a href="#">Emergency Management</a></li>
+                </ul>
+            </li>
+            <li>Appointments
+                <ul>
+                    <li><a href="#">Doctor's Schedule</a></li>
+                    <li><a href="#">Appointment Booking</a></li>
+                    <li><a href="#">Reminders</a></li>
+                </ul>
+            </li>
+            <li>Billing
+                <ul>
+                    <li><a href="#">Billing Summary</a></li>
+                    <li><a href="#">Payment Processing</a></li>
+                    <li><a href="#">Insurance Verification</a></li>
+                </ul>
+            </li>
+            <li>Reports & Analytics
+                <ul>
+                    <li><a href="#">Daily Report</a></li>
+                    <li><a href="#">Patient Flow Analysis</a></li>
+                </ul>
+            </li>
+            <li>Queue & Visitors
+                <ul>
+                    <li><a href="#">Queue Management</a></li>
+                    <li><a href="#">Visitor Log</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div class="container">
+        <h2>Welcome to HMS Reception Dashboard</h2>
+        <p>Here you will find all the essential features and functionalities of a Hospital Management System (HMS) Reception Dashboard, designed to streamline patient interactions and improve efficiency at the hospital front desk.</p>
+        <h2>Features:</h2>
+        <ul>
+            <li>Patient Registration: Capture and manage patient details for new and returning patients.</li>
+            <li>Doctor's Schedule: View and manage doctor availability and appointments.</li>
+            <li>Billing and Payments: Process payments, generate receipts, and verify insurance.</li>
+            <li>Patient Check-In and Check-Out: Manage arrivals, discharges, and final billing.</li>
+            <li>Notifications: Real-time alerts about appointments and emergencies.</li>
+            <li>Queue Management: Organize waiting lists and inform patients about wait times.</li>
+            <li>Visitor Management: Log visitor details and issue passes for those accompanying patients.</li>
+        </ul>
+    </div>
+
+    <footer>
+        &copy; 2024 HMS Reception Dashboard
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            var navbar = document.querySelector('.navbar');
+            navbar.classList.toggle('active');
+        }
+    </script>
+
+</body>
+</html>

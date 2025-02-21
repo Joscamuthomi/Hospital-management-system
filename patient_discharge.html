@@ -1,0 +1,122 @@
+<?php
+// Retrieve patient information (from session or database)
+$patient_name = isset($_POST['patient_name']) ? $_POST['patient_name'] : 'John Doe';
+$patient_id = isset($_POST['patient_id']) ? $_POST['patient_id'] : 'P12345';
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Discharge Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        h2 {
+            color: blue;
+            margin-bottom: 20px;
+        }
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+        .form-container input, .form-container textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .form-container label {
+            font-weight: bold;
+        }
+        .form-container button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .form-container button:hover {
+            background-color: #45a049;
+        }
+
+        /* Button container styling */
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .view-list-button {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .view-list-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Display patient information dynamically -->
+
+
+<div class="form-container">
+    <form action="discharge_submit.php" method="POST">
+        <h2>Discharge Form for <?php echo htmlspecialchars($patient_name); ?> (ID: <?php echo htmlspecialchars($patient_id); ?>)</h2>
+        <!-- Patient ID -->
+        <div class="button-container">
+            <!-- View Discharge List Button -->
+            <a href="discharge_list.php" class="view-list-button" style="position: relative;left: 70%;">View Discharge List</a>
+        </div>
+        <label for="patient_id">Patient ID:</label>
+        <input type="text" id="patient_id" name="patient_id" placeholder="Enter Patient ID" required>
+
+          <!-- Patient Name -->
+        <label for="patient_name">Patient Name:</label>
+        <input type="text" id="patient_name" name="patient_name" placeholder="Enter Patient Name" required>
+
+        <!-- Discharge Date -->
+        <label for="discharge_date">Discharge Date:</label>
+        <input type="date" id="discharge_date" name="discharge_date" required>
+
+        <!-- Discharge Summary -->
+        <label for="discharge_summary">Discharge Summary:</label>
+        <textarea id="discharge_summary" name="discharge_summary" rows="4" required></textarea>
+
+        <!-- Discharge Instructions -->
+        <label for="discharge_instructions">Discharge Instructions:</label>
+        <textarea id="discharge_instructions" name="discharge_instructions" rows="4" required></textarea>
+
+        <!-- Follow-Up Date -->
+        <label for="follow_up_date">Follow-Up Date (optional):</label>
+        <input type="date" id="follow_up_date" name="follow_up_date">
+
+        <!-- Doctor Notes -->
+        <label for="doctor_notes">Doctor Notes (optional):</label>
+        <textarea id="doctor_notes" name="doctor_notes" rows="4"></textarea>
+
+        <!-- Button container for Submit and View List -->
+        <div class="button-container">
+          
+            <button type="submit">Submit Discharge</button>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>
